@@ -129,18 +129,17 @@ public static class Player
         if (command.Noun == "smartphone")
         {
             string incomingCall = @"
- ██▓ ███▄    █  ▄████▄   ▒█████   ███▄ ▄███▓ ██▓ ███▄    █   ▄████     ▄████▄   ▄▄▄       ██▓     ██▓                   
-▓██▒ ██ ▀█   █ ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██▒ ██ ▀█   █  ██▒ ▀█▒   ▒██▀ ▀█  ▒████▄    ▓██▒    ▓██▒                   
-▒██▒▓██  ▀█ ██▒▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▒██▒▓██  ▀█ ██▒▒██░▄▄▄░   ▒▓█    ▄ ▒██  ▀█▄  ▒██░    ▒██░                   
-░██░▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ░██░▓██▒  ▐▌██▒░▓█  ██▓   ▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██░    ▒██░                   
-░██░▒██░   ▓██░▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒░██░▒██░   ▓██░░▒▓███▀▒   ▒ ▓███▀ ░ ▓█   ▓██▒░██████▒░██████▒ ██▓  ██▓  ██▓ 
-░▓  ░ ▒░   ▒ ▒ ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▓  ░ ▒░   ▒ ▒  ░▒   ▒    ░ ░▒ ▒  ░ ▒▒   ▓▒█░░ ▒░▓  ░░ ▒░▓  ░ ▒▓▒  ▒▓▒  ▒▓▒ 
- ▒ ░░ ░░   ░ ▒░  ░  ▒     ░ ▒ ▒░ ░  ░      ░ ▒ ░░ ░░   ░ ▒░  ░   ░      ░  ▒     ▒   ▒▒ ░░ ░ ▒  ░░ ░ ▒  ░ ░▒   ░▒   ░▒  
- ▒ ░   ░   ░ ░ ░        ░ ░ ░ ▒  ░      ░    ▒ ░   ░   ░ ░ ░ ░   ░    ░          ░   ▒     ░ ░     ░ ░    ░    ░    ░   
- ░           ░ ░ ░          ░ ░         ░    ░           ░       ░    ░ ░            ░  ░    ░  ░    ░  ░  ░    ░    ░  
-               ░                                                      ░                                    ░    ░    ░";
+▄▖         ▘          ▜ ▜       
+▐ ▛▌▛▘▛▌▛▛▌▌▛▌▛▌  ▛▘▀▌▐ ▐       
+▟▖▌▌▙▖▙▌▌▌▌▌▌▌▙▌  ▙▖█▌▐▖▐▖▗ ▗ ▗ 
+              ▄▌                
+▄▖  ▜ ▜         ▖               
+▌ ▀▌▐ ▐ █▌▛▘▖   ▌▛▌▛▌           
+▙▖█▌▐▖▐▖▙▖▌ ▖  ▙▌▙▌▌▌                              
+";
             Console.WriteLine(incomingCall);
             TextUtils.TypeText("You answer the call.");
+            TextUtils.TypeText("Hey, how are you?");
             TextUtils.TypeText("Jon: I heard you been sad lately. You can't get any job with your Game Dev degree... LOL! Put your clothes on and meet me outside, I need to talk to you!");
             TextUtils.TypeText("You hang up the phone.");
             TextUtils.TypeText("★★Tip★★: You can skip dialogue by clicking 'Enter' while in dialogue.");

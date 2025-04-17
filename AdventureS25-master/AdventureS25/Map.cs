@@ -28,14 +28,14 @@ public static class Map
             "A large lecture hall with rows of seats and a podium at the front.");
         nameToLocation.Add("Lecture Hall", lectureHall);
         
-        dorm.AddConnection("north", library);
-        library.AddConnection("south", dorm);
-        library.AddConnection("east", cafeteria);
-        cafeteria.AddConnection("west", library);
-        park.AddConnection("west", cafeteria);
-        cafeteria.AddConnection("east", park);
-        lectureHall.AddConnection("north", park);
-        park.AddConnection("south", lectureHall);
+        dorm.AddConnection("n", library);
+        library.AddConnection("s", dorm);
+        library.AddConnection("e", cafeteria);
+        cafeteria.AddConnection("w", library);
+        park.AddConnection("w", cafeteria);
+        cafeteria.AddConnection("e", park);
+        lectureHall.AddConnection("n", park);
+        park.AddConnection("s", lectureHall);
 
         StartLocation = dorm;
     }
