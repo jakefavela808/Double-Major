@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class Player
 {
@@ -16,11 +16,12 @@ public static class Player
         if (CurrentLocation.CanMoveInDirection(command))
         {
             CurrentLocation = CurrentLocation.GetLocationInDirection(command);
-            Console.WriteLine(CurrentLocation.GetDescription());
+            TextUtils.TypeText(CurrentLocation.GetDescription());
+            ShowPossibleDirections();
         }
         else
         {
-            Console.WriteLine("You can't move " + command.Noun + ".");
+            TextUtils.TypeText("You can't move " + command.Noun + ".");
         }
     }
 
@@ -36,22 +37,22 @@ public static class Player
 
         if (item == null)
         {
-            Console.WriteLine("I don't know what " + command.Noun + " is.");
+            TextUtils.TypeText("I don't know what " + command.Noun + " is.");
         }
         else if (!CurrentLocation.HasItem(item))
         {
-            Console.WriteLine("There is no " + command.Noun + " here.");
+            TextUtils.TypeText("There is no " + command.Noun + " here.");
         }
         else if (!item.IsTakeable)
         {
-            Console.WriteLine("The " + command.Noun + " can't be taked.");
+            TextUtils.TypeText("The " + command.Noun + " can't be taked.");
         }
         else
         {
             Inventory.Add(item);
             CurrentLocation.RemoveItem(item);
             item.Pickup();
-            Console.WriteLine("You take the " + command.Noun + ".");
+            TextUtils.TypeText("You take the " + command.Noun + ".");
         }
     }
 
@@ -59,22 +60,22 @@ public static class Player
     {
         if (Inventory.Count == 0)
         {
-            Console.WriteLine("You are empty-handed.");
+            TextUtils.TypeText("You are empty-handed.");
         }
         else
         {
-            Console.WriteLine("You are carrying:");
+            TextUtils.TypeText("You are carrying:");
             foreach (Item item in Inventory)
             {
                 string article = SemanticTools.CreateArticle(item.Name);
-                Console.WriteLine(" " + article + " " + item.Name);
+                TextUtils.TypeText(article + " " + item.Name);
             }
         }
     }
 
     public static void Look()
     {
-        Console.WriteLine(CurrentLocation.GetDescription());
+        TextUtils.TypeText(CurrentLocation.GetDescription());
     }
 
     public static void Drop(Command command)
@@ -84,32 +85,21 @@ public static class Player
         if (item == null)
         {
             string article = SemanticTools.CreateArticle(command.Noun);
-            Console.WriteLine("I don't know what " + article + " " + command.Noun + " is.");
+            TextUtils.TypeText("I don't know what " + article + " " + command.Noun + " is.");
         }
         else if (!Inventory.Contains(item))
         {
-            Console.WriteLine("You're not carrying the " + command.Noun + ".");
+            TextUtils.TypeText("You're not carrying the " + command.Noun + ".");
         }
         else
         {
             Inventory.Remove(item);
             CurrentLocation.AddItem(item);
-            Console.WriteLine("You drop the " + command.Noun + ".");
+            TextUtils.TypeText("You drop the " + command.Noun + ".");
         }
 
     }
-
-    public static void Drink(Command command)
-    {
-        if (command.Noun == "beer")
-        {
-            Console.WriteLine("** drinking beer");
-            Conditions.ChangeCondition(ConditionTypes.IsDrunk, true);
-            RemoveItemFromInventory("beer");
-            AddItemToInventory("beer-bottle");
-        }
-    }
-
+    
     public static void AddItemToInventory(string itemName)
     {
         Item item = Items.GetItemByName(itemName);
@@ -130,5 +120,48 @@ public static class Player
             return;
         }
         Inventory.Remove(item);
+    }
+
+    public static void Use(Command command)
+    {
+        Item item = Items.GetItemByName(command.Noun);
+
+        if (command.Noun == "smartphone")
+        {
+            string incomingCall = @"
+ ██▓ ███▄    █  ▄████▄   ▒█████   ███▄ ▄███▓ ██▓ ███▄    █   ▄████     ▄████▄   ▄▄▄       ██▓     ██▓                   
+▓██▒ ██ ▀█   █ ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██▒ ██ ▀█   █  ██▒ ▀█▒   ▒██▀ ▀█  ▒████▄    ▓██▒    ▓██▒                   
+▒██▒▓██  ▀█ ██▒▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▒██▒▓██  ▀█ ██▒▒██░▄▄▄░   ▒▓█    ▄ ▒██  ▀█▄  ▒██░    ▒██░                   
+░██░▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ░██░▓██▒  ▐▌██▒░▓█  ██▓   ▒▓▓▄ ▄██▒░██▄▄▄▄██ ▒██░    ▒██░                   
+░██░▒██░   ▓██░▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒░██░▒██░   ▓██░░▒▓███▀▒   ▒ ▓███▀ ░ ▓█   ▓██▒░██████▒░██████▒ ██▓  ██▓  ██▓ 
+░▓  ░ ▒░   ▒ ▒ ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▓  ░ ▒░   ▒ ▒  ░▒   ▒    ░ ░▒ ▒  ░ ▒▒   ▓▒█░░ ▒░▓  ░░ ▒░▓  ░ ▒▓▒  ▒▓▒  ▒▓▒ 
+ ▒ ░░ ░░   ░ ▒░  ░  ▒     ░ ▒ ▒░ ░  ░      ░ ▒ ░░ ░░   ░ ▒░  ░   ░      ░  ▒     ▒   ▒▒ ░░ ░ ▒  ░░ ░ ▒  ░ ░▒   ░▒   ░▒  
+ ▒ ░   ░   ░ ░ ░        ░ ░ ░ ▒  ░      ░    ▒ ░   ░   ░ ░ ░ ░   ░    ░          ░   ▒     ░ ░     ░ ░    ░    ░    ░   
+ ░           ░ ░ ░          ░ ░         ░    ░           ░       ░    ░ ░            ░  ░    ░  ░    ░  ░  ░    ░    ░  
+               ░                                                      ░                                    ░    ░    ░";
+            Console.WriteLine(incomingCall);
+            TextUtils.TypeText("You answer the call.");
+            TextUtils.TypeText("Jon: I heard you been sad lately. You can't get any job with your Game Dev degree... LOL! Put your clothes on and meet me outside, I need to talk to you!");
+            TextUtils.TypeText("You hang up the phone.");
+            TextUtils.TypeText("★★Tip★★: You can skip dialogue by clicking 'Enter' while in dialogue.");
+        }
+
+
+    }
+
+    public static void ShowPossibleDirections()
+    {
+        if (CurrentLocation.Connections.Count == 0)
+        {
+            TextUtils.TypeText("No possible directions.");
+            return;
+        }
+        var dirList = new List<string>();
+        foreach (var kvp in CurrentLocation.Connections)
+        {
+            string dir = char.ToUpper(kvp.Key[0]) + kvp.Key.Substring(1);
+            dirList.Add($"{dir} ({kvp.Value.GetName()})");
+        }
+        TextUtils.TypeText("Possible directions: " + string.Join(", ", dirList));
     }
 }

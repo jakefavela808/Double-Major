@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class ExplorationCommandHandler
 {
@@ -18,11 +18,7 @@ public static class ExplorationCommandHandler
             {"fight", ChangeToFightState},
             {"explore", ChangeToExploreState},
             {"talk", ChangeToTalkState},
-            {"drink", Drink},
-            {"beerme", SpawnBeerInInventory},
-            {"unbeerme", UnSpawnBeerInInventory},
-            {"puke", Puke},
-            {"tidyup", TidyUp}
+            {"use", Use}
         };
 
     private static void TidyUp(Command command)
@@ -46,10 +42,6 @@ public static class ExplorationCommandHandler
         Conditions.ChangeCondition(ConditionTypes.IsBeerMed, true);
     }
 
-    private static void Drink(Command command)
-    {
-        Player.Drink(command);
-    }
 
     private static void ChangeToTalkState(Command obj)
     {
@@ -129,7 +121,12 @@ public static class ExplorationCommandHandler
 
     public static void Eat(Command command)
     {
-        Console.WriteLine("Eating..." + command.Noun);
+        TextUtils.TypeText("Eating..." + command.Noun);
+    }
+
+    public static void Use(Command command)
+    {
+        Player.Use(command);
     }
 
     public static void Move(Command command)

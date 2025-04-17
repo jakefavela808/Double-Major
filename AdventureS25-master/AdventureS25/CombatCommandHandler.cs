@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class CombatCommandHandler
 {
@@ -22,22 +22,22 @@ public static class CombatCommandHandler
 
     private static void Fight(Command command)
     {
-        Console.WriteLine("You fight it in the face parts");
+        TextUtils.TypeText("You fight it in the face parts");
     }
     
     private static void Defend(Command command)
     {
-        Console.WriteLine("You defend it in the face parts");
+        TextUtils.TypeText("You defend it in the face parts");
     }
 
     private static void Potion(Command command)
     {
-        Console.WriteLine("You quaff the potion parts");
+        TextUtils.TypeText("You quaff the potion parts");
     }
     
     private static void Run(Command command)
     {
-        Console.WriteLine("You flee");
+        TextUtils.TypeText("You flee");
         States.ChangeState(StateTypes.Exploring);
     }
 }

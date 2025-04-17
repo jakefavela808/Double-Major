@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public class Location
 {
@@ -13,6 +13,11 @@ public class Location
         name = nameInput;
         Description = descriptionInput;
         Connections = new Dictionary<string, Location>();
+    }
+
+    public string GetName()
+    {
+        return name;
     }
 
     public void AddConnection(string direction, Location location)

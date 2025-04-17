@@ -1,27 +1,31 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class ExplorationCommandValidator
 {
     public static List<string> Verbs = new List<string>
-        {"go", "eat", "take", "drop", "drink"};
+        {"go", "eat", "take", "drop", "use"};
     
     public static List<string> StandaloneVerbs = new List<string>
     {
         "exit", "inventory", "look", "tron", "troff",
-        "nouns", "verbs", "fight", "explore", "talk", "beerme", 
-        "unbeerme", "puke", "tidyup"
+        "nouns", "verbs", "fight", "explore", "talk"
     };
     
     public static List<string> Nouns = new List<string>
     {
-        "bagel", "apple", "beer", "east", "west", "north", "south",
-        "up", "down", "sword"
+        "e", "w", "n", "s", "smartphone"
     };
     
     public static bool IsValid(Command command)
     {
         bool isValid = false;
         
+        // If both verb and noun are blank, do nothing (no error message)
+        if (string.IsNullOrWhiteSpace(command.Verb) && string.IsNullOrWhiteSpace(command.Noun))
+        {
+            return false;
+        }
+
         if (IsVerb(command.Verb))
         {
             Debugger.Write("Valid verb: " + command.Verb);

@@ -8,24 +8,36 @@ public static class Map
     
     public static void Initialize()
     {
-        Location entrance = new Location("Entrance", 
-            "This is the entrance room. Everything starts here.");
-        nameToLocation.Add("Entrance", entrance);
+        Location dorm = new Location("Dorm Room", 
+            "A cozy dorm room with books and posters of musicians. A cluttered desk with a laptop sits in the corner, and the bed is unmade.");
+        nameToLocation.Add("Dorm Room", dorm);
         
-        Location storage = new Location("Storage", 
-            "You are in a small storage room. There are lots of things.");
-        nameToLocation.Add("Storage", storage);
+        Location library = new Location("Library", 
+            "You are in the college library. Shelves of books stretch endlessly, and students are quietly studying.");
+        nameToLocation.Add("Library", library);
         
-        Location throne = new Location("Throne Room", 
-            "There is a big ass throne here.");
-        nameToLocation.Add("Throne Room", throne);
+        Location cafeteria = new Location("Cafeteria", 
+            "The cafeteria is bustling with students. The smell of various foods fills the air.");
+        nameToLocation.Add("Cafeteria", cafeteria);
         
-        entrance.AddConnection("east", storage);
-        storage.AddConnection("west", entrance);
-        throne.AddConnection("south", entrance);
-        entrance.AddConnection("north", throne);
+        Location park = new Location("Campus Park", 
+            "A peaceful park with benches and walking paths. Students relax and chat here.");
+        nameToLocation.Add("Campus Park", park);
+        
+        Location lectureHall = new Location("Lecture Hall", 
+            "A large lecture hall with rows of seats and a podium at the front.");
+        nameToLocation.Add("Lecture Hall", lectureHall);
+        
+        dorm.AddConnection("north", library);
+        library.AddConnection("south", dorm);
+        library.AddConnection("east", cafeteria);
+        cafeteria.AddConnection("west", library);
+        park.AddConnection("west", cafeteria);
+        cafeteria.AddConnection("east", park);
+        lectureHall.AddConnection("north", park);
+        park.AddConnection("south", lectureHall);
 
-        StartLocation = entrance;
+        StartLocation = dorm;
     }
     
 

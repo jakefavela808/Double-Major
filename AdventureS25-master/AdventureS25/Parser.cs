@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class Parser
 {
@@ -12,7 +12,8 @@ public static class Parser
 
         if (input == "")
         {
-            words = new List<string>();
+            // Return a blank command with no error message
+            return new Command();
         }
         
         Command command = new Command();
@@ -28,7 +29,7 @@ public static class Parser
         }
         else
         {
-            Console.WriteLine("I don't understand that.");
+            TextUtils.TypeText("I don't understand that.");
         }
         
         return command;
