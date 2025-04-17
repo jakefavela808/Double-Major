@@ -45,7 +45,19 @@ public static class ExplorationCommandHandler
 
     private static void ChangeToTalkState(Command obj)
     {
-        States.ChangeState(StateTypes.Talking);
+        var currentLocation = Player.CurrentLocation;
+        if (currentLocation.HasNPC("Jon"))
+        {
+            States.ChangeState(StateTypes.Talking);
+            var jon = currentLocation.GetNPC("Jon");
+            TextUtils.TypeText(jon.Dialogue);
+            // Optionally, set a flag or context for ConversationCommandHandler to know we're talking to Jon
+            ConversationContext.CurrentNPC = jon;
+        }
+        else
+        {
+            TextUtils.TypeText("There's no one here to talk to.");
+        }
     }
     
     private static void ChangeToFightState(Command obj)

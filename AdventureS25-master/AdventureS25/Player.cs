@@ -2,6 +2,7 @@ namespace AdventureS25;
 
 public static class Player
 {
+    public static bool HasUsedSmartphone = false;
     public static Location CurrentLocation;
     public static List<Item> Inventory;
 
@@ -9,10 +10,32 @@ public static class Player
     {
         Inventory = new List<Item>();
         CurrentLocation = Map.StartLocation;
+        HasUsedSmartphone = false;
     }
 
     public static void Move(Command command)
     {
+        // Prevent leaving Dorm Room without taking and using the smartphone
+        if (CurrentLocation.GetName() == "Dorm Room")
+        {
+            // Check if the player is trying to leave (any valid direction)
+            if (CurrentLocation.CanMoveInDirection(command))
+            {
+                // Check for smartphone in inventory
+                Item smartphone = Items.GetItemByName("smartphone");
+                bool hasSmartphone = smartphone != null && Inventory.Contains(smartphone);
+                if (!hasSmartphone)
+                {
+                    TextUtils.TypeText("You should take your smartphone before leaving!");
+                    return;
+                }
+                if (!HasUsedSmartphone)
+                {
+                    TextUtils.TypeText("You should use your smartphone before leaving!");
+                    return;
+                }
+            }
+        }
         if (CurrentLocation.CanMoveInDirection(command))
         {
             CurrentLocation = CurrentLocation.GetLocationInDirection(command);
@@ -136,20 +159,16 @@ public static class Player
 ██║██║╚██╗██║██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║   ██║    ██║     ██╔══██║██║     ██║              
 ██║██║ ╚████║╚██████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝    ╚██████╗██║  ██║███████╗███████╗██╗██╗██╗
 ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝      ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═╝╚═╝
-       
-▄▖  ▜ ▜         ▖               
-▌ ▀▌▐ ▐ █▌▛▘▖   ▌▛▌▛▌           
-▙▖█▌▐▖▐▖▙▖▌ ▖  ▙▌▙▌▌▌                              
+                            
 ";
             Console.WriteLine(incomingCall);
             TextUtils.TypeText("You answer the call.");
-            TextUtils.TypeText("Hey, how are you?");
+            TextUtils.TypeText("Jon: Hey, how are you?");
             TextUtils.TypeText("Jon: I heard you been sad lately. You can't get any job with your Game Dev degree... LOL! Put your clothes on and meet me outside, I need to talk to you!");
             TextUtils.TypeText("You hang up the phone.");
             TextUtils.TypeText("★★Tip★★: You can skip dialogue by clicking 'Enter' while in dialogue.");
+            HasUsedSmartphone = true;
         }
-
-
     }
 
     public static void ShowPossibleDirections()

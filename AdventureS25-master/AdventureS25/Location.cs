@@ -4,15 +4,46 @@ public class Location
 {
     private string name;
     public string Description;
-    
     public Dictionary<string, Location> Connections;
     public List<Item> Items = new List<Item>();
+    public List<NPC> NPCs = new List<NPC>(); // Add NPC support
     
     public Location(string nameInput, string descriptionInput)
     {
         name = nameInput;
         Description = descriptionInput;
         Connections = new Dictionary<string, Location>();
+        NPCs = new List<NPC>();
+    }
+
+    public void AddNPC(NPC npc)
+    {
+        NPCs.Add(npc);
+    }
+
+    public void RemoveNPC(NPC npc)
+    {
+        NPCs.Remove(npc);
+    }
+
+    public bool HasNPC(string npcName)
+    {
+        foreach (var npc in NPCs)
+        {
+            if (npc.Name == npcName)
+                return true;
+        }
+        return false;
+    }
+
+    public NPC GetNPC(string npcName)
+    {
+        foreach (var npc in NPCs)
+        {
+            if (npc.Name == npcName)
+                return npc;
+        }
+        return null;
     }
 
     public string GetName()
@@ -42,6 +73,12 @@ public class Location
     public string GetDescription()
     {
         string fullDescription = name + "\n" + Description;
+
+        if (NPCs != null && NPCs.Count > 0)
+        {
+            var npcNames = string.Join(", ", NPCs.Select(n => n.Name));
+            fullDescription += $"\nYou see: {npcNames}.";
+        }
 
         foreach (Item item in Items)
         {

@@ -1,4 +1,4 @@
-﻿namespace AdventureS25;
+namespace AdventureS25;
 
 public static class Map
 {
@@ -9,12 +9,16 @@ public static class Map
     public static void Initialize()
     {
         Location dorm = new Location("Dorm Room", 
-            "A cozy dorm room with books and posters of musicians. A cluttered desk with a laptop sits in the corner, and the bed is unmade.");
+            "A small, cozy room with a single bed, a desk, and a window with a view of the campus.");
         nameToLocation.Add("Dorm Room", dorm);
         
         Location library = new Location("Library", 
             "You are in the college library. Shelves of books stretch endlessly, and students are quietly studying.");
         nameToLocation.Add("Library", library);
+
+        // Add Jon as an NPC to the Library
+        NPC jon = new NPC("Jon", "Jon looks up from his book and says, 'Hey! Good to see you. Got any questions about the double major?'");
+        library.AddNPC(jon);
         
         Location cafeteria = new Location("Cafeteria", 
             "The cafeteria is bustling with students. The smell of various foods fills the air.");
