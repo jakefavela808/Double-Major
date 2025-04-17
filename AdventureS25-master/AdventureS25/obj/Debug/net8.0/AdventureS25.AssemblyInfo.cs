@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdventureS25")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2be433f855b74a738552baebdb6d4cfab46d922b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39e7ed02be230784007969026096236b4fff76ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdventureS25")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdventureS25")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

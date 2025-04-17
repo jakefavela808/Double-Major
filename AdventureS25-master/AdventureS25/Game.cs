@@ -9,6 +9,7 @@ public static class Game
 
         ShowHelp();
         TextUtils.TypeText(Player.GetLocationDescription());
+        Player.ShowPossibleDirections();
         
         bool isPlaying = true;
         
